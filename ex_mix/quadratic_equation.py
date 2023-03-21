@@ -7,11 +7,11 @@ def quadratic(a, b, c):
     x2 = None
 
     if d > 0:
-        x1 = -b + d * 0.5 / 2 * a
-        x2 = -b - d * 0.5 / 2 * a
+        x1 = (-b + d ** 0.5) / (2 * a)
+        x2 = (-b - d ** 0.5) / (2 * a)
         return f'x1 = {x1}\nx2 = {x2}'
     elif d == 0:
-        x1 = x2 = -b / 2 * a
+        x1 = x2 = -b / (2 * a)
         return f'x1 = x2 = {x1}'
     else:
         return 'Az egyenletnek nincs megoldása a valós számok halmazán'
