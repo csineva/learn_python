@@ -51,23 +51,32 @@ def create_spend_chart(categories):
     for category in withdraws_dict:
         percent = int((withdraws_dict[category][0] * 100 / sum_withdraws) // 10)
         withdraws_dict[category].append(percent)
-    print(withdraws_dict)
-    print(longest_category)
 
     percents = []
-    percents.append([f'{percent:>3}|' for percent in range(0, 101, 10)][::-1])
+    percents.append([f'{percent:>3}| ' for percent in range(0, 101, 10)][::-1])
     for percent in withdraws_dict:
-        percents.append(["o" if o <= withdraws_dict[percent][1] else "" for o in range(11)][::-1])
+        percents.append(["o  " if o <= withdraws_dict[percent][1] else "" for o in range(11)][::-1])
 
-    print(percents)
-
-    print("Percentage spent by category")
+    final = "Percentage spent by category\n"
     print_percents = []
     for index in range(11):
         row = ""
         for percent in percents:
-            row += f'{percent[index]:>2}'
-        print(row)
+            row += f'{percent[index]:>3}'
+        final += f'{row}\n'
+    final += f'{" " * 4}{"-" * 10}\n'
+
+    for index in range(longest_category):
+        row = "     "
+        for key in withdraws_dict:
+            try:
+                # row += ""
+                row += f'{key[index]:3}'
+            except IndexError:
+                row += f'   '
+        final += f'{row}\n'
+
+    return final[:-1]
 
 food = Category("Food")
 entertainment = Category("Entertainment")
@@ -79,6 +88,3 @@ food.withdraw(105.55)
 entertainment.withdraw(33.40)
 business.withdraw(10.99)
 create_spend_chart([business, food, entertainment])
-# print("Percentage spent by category\n100|          \n 90|          \n 80|          \n 70|    o     \n 60|    o     \n 50|    o     \n 40|    o     \n 30|    o     \n 20|    o  o  \n 10|    o  o  \n  0| o  o  o  \n    ----------\n     B  F  E  \n     u  o  n  \n     s  o  t  \n     i  d  e  \n     n     r  \n     e     t  \n     s     a  \n     s     i  \n           n  \n           m  \n           e  \n           n  \n           t  ")
-# wd = [i for i in food.ledger]
-# print()
