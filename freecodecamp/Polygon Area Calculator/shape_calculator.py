@@ -1,3 +1,5 @@
+# https://www.freecodecamp.org/learn/scientific-computing-with-python/scientific-computing-with-python-projects/polygon-area-calculator
+
 class Rectangle:
     def __init__(self, width, height):
         self.width = width
@@ -22,10 +24,17 @@ class Rectangle:
         return (self.width ** 2 + self.height ** 2) ** 0.5
 
     def get_picture(self):
-        pass
+        picture = ""
+        if self.width > 50 or self.height > 50:
+            return "Too big for picture."
+        for row in range(self.height):
+            picture += "*" * self.width + "\n"
+        return picture
 
-    def get_amount_inside(self):
-        pass
+    def get_amount_inside(self, shape):
+        horizontal_fit = self.width // shape.width
+        vertical_fit = self.height // shape.height
+        return horizontal_fit * vertical_fit
 
 
 class Square(Rectangle):
@@ -54,6 +63,7 @@ class Square(Rectangle):
 
 
 s = Square(7)
+f = Rectangle(2, 3)
 s.set_height(6)
 print(s.side)
 print(s.height)
@@ -61,3 +71,5 @@ print(s.width)
 print(s)
 print((s.get_area()))
 print((s.get_perimeter()))
+print(s.get_picture())
+print(s.get_amount_inside(f))
